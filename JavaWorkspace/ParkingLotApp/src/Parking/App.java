@@ -14,7 +14,9 @@ public class App {
 	public void finalize() throws Throwable {
 
 	}
-	public static void main(){
-
+	public static void main(String[] args)
+	{
+		WebCommunications web = new WebCommunications();
+		
 	}
 }//end App
