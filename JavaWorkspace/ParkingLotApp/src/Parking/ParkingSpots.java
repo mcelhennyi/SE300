@@ -1,3 +1,4 @@
+package Parking;
 
 
 /**
@@ -16,11 +17,11 @@ public class ParkingSpots {
 	public void finalize() throws Throwable {
 
 	}
-	public setEmpty(){
+	public void setEmpty(){
 
 	}
 
-	public setOccupied(){
+	public void setOccupied(){
 
 	}
 }//end ParkingSpots

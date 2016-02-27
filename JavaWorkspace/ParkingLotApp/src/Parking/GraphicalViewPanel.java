@@ -1,3 +1,4 @@
+package Parking;
 
 
 /**
@@ -16,15 +17,15 @@ public class GraphicalViewPanel extends GuiView {
 	public void finalize() throws Throwable {
 		super.finalize();
 	}
-	public setDisable(){
+	public void setDisable(){
 
 	}
 
-	public setEnable(){
+	public void setEnable(){
 
 	}
 
-	public updateLayer(){
+	public void updateLayer(){
 
 	}
 }//end GraphicalViewPanel

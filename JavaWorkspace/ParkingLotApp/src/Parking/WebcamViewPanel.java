@@ -1,3 +1,4 @@
+package Parking;
 
 
 /**
@@ -16,15 +17,15 @@ public class WebcamViewPanel extends GuiView {
 	public void finalize() throws Throwable {
 		super.finalize();
 	}
-	public setDisable(){
+	public void setDisable(){
 
 	}
 
-	public setEnable(){
+	public void setEnable(){
 
 	}
 
-	public updateView(){
+	public void updateView(){
 
 	}
 }//end WebcamViewPanel

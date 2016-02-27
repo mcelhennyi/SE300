@@ -1,4 +1,6 @@
+package Parking;
 
+import java.io.File;
 
 /**
  * @author Josh
@@ -16,7 +18,7 @@ public class PredictionModel {
 	public void finalize() throws Throwable {
 
 	}
-	public addToHistory(){
+	public void addToHistory(){
 
 	}
 

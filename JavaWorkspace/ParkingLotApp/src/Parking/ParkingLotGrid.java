@@ -1,3 +1,4 @@
+package Parking;
 
 
 /**
@@ -8,7 +9,7 @@
 public class ParkingLotGrid {
 
 	private boolean isFull;
-	private parkingSpot myGrid;
+	private ParkingSpots myGrid;
 	private String timeSinceUpdated;
 	public ParkingSpots m_ParkingSpots;
 
@@ -19,7 +20,7 @@ public class ParkingLotGrid {
 	public void finalize() throws Throwable {
 
 	}
-	public updateGrid(){
+	public void updateGrid(){
 
 	}
 }//end ParkingLotGrid

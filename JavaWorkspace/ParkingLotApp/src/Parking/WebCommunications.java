@@ -1,3 +1,4 @@
+package Parking;
 
 
 /**
@@ -16,11 +17,11 @@ public class WebCommunications {
 	public void finalize() throws Throwable {
 
 	}
-	public getImage(){
+	public void getImage(){
 
 	}
 
-	public processImage(){
+	public void processImage(){
 
 	}
 }//end WebCommunications
