@@ -13,14 +13,18 @@ public class ParkingLotGrid {
 	private String timeSinceUpdated;
 	public ParkingSpots m_ParkingSpots;
 
-	public ParkingLotGrid(){
+	public ParkingLotGrid()
+	{
 
 	}
 
-	public void finalize() throws Throwable {
+	public void finalize() throws Throwable 
+	{
 
 	}
-	public void updateGrid(){
+	
+	public void updateGrid()
+	{
 
 	}
 }//end ParkingLotGrid
