@@ -27,20 +27,99 @@ public class WebCommunications implements MouseListener
 {
 
 	private String error;
+	
 
 	public WebCommunications()
 	{
-		processImage();
+		procImage();
 	}
 
-	public void finalize() throws Throwable {
+	public void finalize() throws Throwable 
+	{
 
 	}
-	public void getImage(){
+	public void getImage()
+	{
 
 	}
 
+	
+	
 	public void processImage()
+	{
+		//Load image from file
+		Mat img = Highgui.imread("src/main/resources/bottomOpen.JPG");
+		
+		////////////////////////
+		//Initialize Variables//
+		////////////////////////
+		Mat crop;
+		Mat blur = null;
+		Mat hsv = null;
+		Mat mask = null;
+		int black = 0;
+		int white = 0;
+		double ratio = 0;
+		ParkingLotGrid parkingLot = new ParkingLotGrid();
+		ParkingSpots[] spotArray = parkingLot.getSpotArray();
+		
+		//loop through array or parking lot and process each spot
+		for(int i = 0; i <= parkingLot.getSpotArray().length; i++)
+		{
+			//Crop to the Nth spot
+			crop = img.submat(spotArray[i].getYRange(), spotArray[i].getXRange());
+			
+			//Create a Blur, hsv, and mask matrix same size and type as crop for bilateral filter return, hsv return and mask return
+			Size size = new Size(crop.width(), crop.height());
+			blur = Mat.zeros(size , 0);
+			hsv = Mat.zeros(size , 0);
+			mask = Mat.zeros(size , 0);
+
+			//bilaterally filter the image
+			Imgproc.bilateralFilter(crop, blur, 20, 75, 75);
+			
+			//Convert color space to HSV
+			Imgproc.cvtColor(blur, hsv, Imgproc.COLOR_RGB2HSV);
+			
+			//Mask img with upper and lower limits
+			Core.inRange(hsv, spotArray[i].getLowerHsv(), spotArray[i].getUpperHsv(), mask);
+
+			//Count the white pixels and black pixels
+			for(int x = 0; x <= mask.size().width - 1; x++)
+			{
+				for(int y = 0; y <= mask.size().height - 1; y++)
+				{
+					if(mask.get(y, x)[0] == 0.0)
+					{
+						black++;
+					}
+					else if(mask.get(y, x)[0] == 255.0)
+					{
+						white++;
+					}
+				}
+			}
+			
+			System.out.println(black + ", " + white);
+			
+			//Make decision about status of spot
+			ratio = (double)white/(white+black);
+			if(ratio > 0.5)
+			{
+				System.out.println("Open");
+			}
+			else if(ratio < 0.5)
+			{
+				System.out.println("Taken");
+			}
+			
+			Image image1 = Mat2BufferedImage(img);
+		    displayImage(image1);
+		}
+		
+	}
+	
+	public void procImage()
 	{
 		////////////////////////
 		//Initialize Variables//
@@ -184,26 +263,30 @@ public class WebCommunications implements MouseListener
     }
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent arg0) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseExited(MouseEvent arg0) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent e) 
+	{
 		System.out.println("Entered ");
    System.out.println(e.getPoint());
 		
 	}
 
 	
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent e) 
+	{
 		System.out.println("Exited");
    System.out.println(e.getPoint());
 		
