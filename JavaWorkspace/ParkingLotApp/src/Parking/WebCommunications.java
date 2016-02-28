@@ -1,6 +1,8 @@
 package Parking;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
@@ -21,7 +23,8 @@ import org.opencv.imgproc.Imgproc;
  * @version 1.0
  * @created 19-Feb-2016 5:52:38 PM
  */
-public class WebCommunications {
+public class WebCommunications implements MouseListener
+{
 
 	private String error;
 
@@ -49,6 +52,7 @@ public class WebCommunications {
 	    Mat hsv = null;
 	    Mat mask = null;
 	    Scalar lower = new Scalar(0,0,0);
+	    //to make the upper liit better look at three always open spots and average the value of the spots to keep a good upper limit
 	    Scalar upper = new Scalar(125,40,110); //Based on spot 6 open in bottom open jpg
 	    int black = 0;
 	    int white = 0;
@@ -110,12 +114,19 @@ public class WebCommunications {
 			
 		//GOTO top of loop
 
+			
+			
+			
+			///////////////////////
+			//Display Image(Temp)//
+			///////////////////////		
+			
 		 // Save the visualized detection.
 //		    String filename = "faceDetection.png";
 //		    System.out.println(String.format("Writing %s", filename));
 //		    Highgui.imwrite(filename, crop);
 		
-		    Image image1 = Mat2BufferedImage(mask);
+		    Image image1 = Mat2BufferedImage(img);
 		    displayImage(image1);
 		    
 		    /////////
@@ -126,6 +137,12 @@ public class WebCommunications {
 //			System.out.print(hsv.get(40, 15)[2]); //[110, 37, 104]
 
 	}
+	
+	
+	
+	/////////////
+	//Temporary//
+	/////////////
 	public BufferedImage Mat2BufferedImage(Mat m)
 	{
 		// Fastest code
@@ -142,7 +159,7 @@ public class WebCommunications {
 		final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		System.arraycopy(b, 0, targetPixels, 0, b.length);  
 		return image;
-		}
+	}
 	
 	public void displayImage(Image img2) 
 	{
@@ -153,8 +170,42 @@ public class WebCommunications {
     	frame.setSize(img2.getWidth(null)+50, img2.getHeight(null)+50);     
     	JLabel lbl=new JLabel();
     	lbl.setIcon(icon);
+    	lbl.addMouseListener(this);
     	frame.add(lbl);
     	frame.setVisible(true);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) 
+	{
+	       System.out.println("Mouse clicked (# of clicks: "
+	                    + e.getClickCount() + ")");
+	       System.out.println(e.getPoint());
+    }
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void mousePressed(MouseEvent e) {
+		System.out.println("Entered ");
+   System.out.println(e.getPoint());
+		
+	}
+
+	
+	public void mouseReleased(MouseEvent e) {
+		System.out.println("Exited");
+   System.out.println(e.getPoint());
+		
+	}
 }//end WebCommunications
