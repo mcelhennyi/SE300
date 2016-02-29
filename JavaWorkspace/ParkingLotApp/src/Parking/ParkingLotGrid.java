@@ -15,6 +15,7 @@ public class ParkingLotGrid
 	private ParkingSpots[] myGrid;
 	private String timeSinceUpdated;
 	public ParkingSpots m_ParkingSpots;
+	private int totalSpots = 28; //Starting count with 1 not zero.
 
 	//Hard Coded array of Ranges for all the spots, if we make it were this is done through the GUI this isnt needed anymore
 	private Range[] xRange = {  new Range(195, 218), new Range(224, 258),new Range(262, 301),new Range(299, 341),new Range(373, 422),new Range(414, 455),
@@ -27,7 +28,7 @@ public class ParkingLotGrid
 								new Range(235, 270), new Range(240, 269),new Range(243, 273),new Range(276, 328),new Range(278, 329),new Range(282, 333),
 								new Range(284, 334), new Range(284, 333),new Range(285, 335),new Range(285, 334),new Range(289, 334),new Range(291, 334),
 								new Range(289, 335), new Range(293, 335),new Range(292, 330),new Range(291, 330),new Range(401, 480),new Range(408, 478),
-								new Range(415, 478), new Range(413, 479), new Range(403, 479),new Range(395, 478)};
+								new Range(415, 478), new Range(413, 479),new Range(403, 479),new Range(395, 478)};
 	
 	private Scalar lower = new Scalar(0, 0, 0);
 	private Scalar spot0_8 = new Scalar(170, 62, 245);
@@ -36,8 +37,7 @@ public class ParkingLotGrid
 	
 	public ParkingLotGrid()
 	{
-		//This should be dynamic but is hard coded for now.
-		setGridSize(28);//I, ian, counted 28 spots that i think we can process effectively in the area
+		
 	}
 
 	public void finalize() throws Throwable 
@@ -47,8 +47,12 @@ public class ParkingLotGrid
 	
 	public void setGridSize(int size)
 	{
-		this.myGrid = new ParkingSpots[size];
-		populateGrid();//thid call being here is temp unless we make this a hardcoded parking lot
+		this.myGrid = new ParkingSpots[totalSpots];
+		for(int i = 0; i <= totalSpots-1; i++)
+			{
+				this.myGrid[i] = new ParkingSpots();
+			}
+		populateGrid();//this call being here is temp unless we make this a hardcoded parking lot
 	}
 	
 	//Gives a certain number spot a location of pixels in the picture for all spots in the photo
@@ -56,7 +60,7 @@ public class ParkingLotGrid
 	{
 		for(int i = 0; i <= this.myGrid.length - 1; i++)
 		{
-			this.myGrid[i].setLocation(this.xRange[i], this.yRange[i]);
+			this.myGrid[i].setLocation(xRange[i], yRange[i]);
 		}
 	}
 	

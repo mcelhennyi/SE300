@@ -74,10 +74,13 @@ public class WebCommunications implements MouseListener
 		int white = 0;
 		double ratio = 0;
 		ParkingLotGrid parkingLot = new ParkingLotGrid();
+		//This should be dynamic but is hard coded for now.
+		parkingLot.setGridSize(28);//I, ian, counted 28 spots that i think we can process effectively in the area
 		ParkingSpots[] spotArray = parkingLot.getSpotArray();
+
 		
 		//loop through array or parking lot and process each spot
-		for(int i = 0; i <= parkingLot.getSpotArray().length; i++)
+		for(int i = 0; i <= parkingLot.getSpotArray().length-1; i++)
 		{
 			//Crop to the Nth spot
 			crop = img.submat(spotArray[i].getYRange(), spotArray[i].getXRange());
@@ -119,16 +122,16 @@ public class WebCommunications implements MouseListener
 			ratio = (double)white/(white+black);
 			if(ratio > 0.5)
 			{
-				System.out.println("Spot: " + i + " is open");
+				System.out.println("Spot: " + (i+1) + " is open");
 				parkingLot.setStatus(i, true);//spot empty
 			}
 			else if(ratio < 0.5)
 			{
-				System.out.println("Spot: " + i + " is taken");
+				System.out.println("Spot: " + (i+1) + " is taken");
 				parkingLot.setStatus(i, false);//spot occupied
 			}
 			
-			Image image1 = Mat2BufferedImage(img);
+			Image image1 = Mat2BufferedImage(crop);
 		    displayImage(image1);
 		}
 		
