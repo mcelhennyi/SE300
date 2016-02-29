@@ -1,6 +1,7 @@
 package Parking;
 
 import org.opencv.core.Range;
+import org.opencv.core.Scalar;
 
 /**
  * @author michaelh
@@ -28,6 +29,10 @@ public class ParkingLotGrid
 								new Range(289, 335), new Range(293, 335),new Range(292, 330),new Range(291, 330),new Range(401, 480),new Range(408, 478),
 								new Range(415, 478), new Range(413, 479), new Range(403, 479),new Range(395, 478)};
 	
+	private Scalar lower = new Scalar(0, 0, 0);
+	private Scalar spot0_8 = new Scalar(170, 62, 245);
+	private Scalar spot9_27 = new Scalar(120,45,170);
+
 	
 	public ParkingLotGrid()
 	{
@@ -43,9 +48,10 @@ public class ParkingLotGrid
 	public void setGridSize(int size)
 	{
 		this.myGrid = new ParkingSpots[size];
-		populateGrid();//temp if we make this a hardcoded parking lot
+		populateGrid();//thid call being here is temp unless we make this a hardcoded parking lot
 	}
 	
+	//Gives a certain number spot a location of pixels in the picture for all spots in the photo
 	public void populateGrid()
 	{
 		for(int i = 0; i <= this.myGrid.length - 1; i++)
@@ -55,7 +61,31 @@ public class ParkingLotGrid
 	}
 	
 	//Set the hsv value for each spot
+	public void setHSV()
+	{
+		for(int i = 0; i <= 8; i++)
+		{
+			this.myGrid[i].setHSVLimits(this.lower, this.spot0_8);;
+		}
+		for(int i = 9; i <= this.myGrid.length - 1; i++)
+		{
+			this.myGrid[i].setHSVLimits(this.lower, this.spot9_27);;
+		}
+	}
 	
+	//set the spot status: True is empty
+	public void setStatus(int spotNumber, boolean status)
+	{
+		if(status)
+		{
+			myGrid[spotNumber].setEmpty();
+		}
+		else
+		{
+			myGrid[spotNumber].setOccupied();
+		}
+		
+	}
 	
 	//Return array of parking spots
 	public ParkingSpots[] getSpotArray()
