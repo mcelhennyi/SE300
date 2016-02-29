@@ -62,6 +62,7 @@ public class ParkingLotGrid
 		{
 			this.myGrid[i].setLocation(xRange[i], yRange[i]);
 		}
+		setHSV();
 	}
 	
 	//Set the hsv value for each spot
