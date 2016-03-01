@@ -17,13 +17,15 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
 /**
- * @author Ian McElhenny, Tim Christovitch
+ * @author Ian McElhenny, Tim Christovitch, Joshua Swain
  * @version 1.0
  * @created 19-Feb-2016 5:52:38 PM
  */
 public class WebCommunications {
 
 	private String error;
+	
+	public static Mat image;	// added to allow GuiView access to image TODO clean this up
 
 	public WebCommunications()
 	{
@@ -59,6 +61,7 @@ public class WebCommunications {
 		
 	    //Load image from file
 		Mat img = Highgui.imread("src/main/resources/bottomOpen.JPG");
+		image = img;	// added to allow GuiView access to image TODO clean this up
 		
 		//LOOP:
 			//Crop to the Nth spot: cropN = img[y:y+h, x:x+w]
