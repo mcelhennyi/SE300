@@ -7,15 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 /**
- * @author michaelh
+ * @author Joshua Swain
  * @version 1.0
  * @created 19-Feb-2016 5:52:26 PM
  */
 public class App extends Application {
-
-	public App(){
-
-	}
 
 	public void start(Stage primaryStage) {
 		try {	//load GUI.fxml to new pane, create new scene, put it in primaryStage, all that fun stuff
