@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 
 public class PullImage {
 
-	public static void main(String[] args) throws Exception {
+	public static void beginStreamingData(){
 		/*Use this if your library path is giving you trouble, i.e.:
 		 * Exception in thread "main" java.lang.UnsatisfiedLinkError: no opencv_java2411 in java.library.path
 		 * 
@@ -35,12 +35,17 @@ public class PullImage {
 	    
 	    Frame frame1;
 		frame1 = grabber.grab();
+		
+		/*
 		CanvasFrame canvasFrame = new CanvasFrame("Camera");
 	    canvasFrame.setCanvasSize(frame1.imageWidth, (frame1.imageHeight));
 	    while (canvasFrame.isVisible() && (frame1 = grabber.grab()) != null) {
 	        canvasFrame.showImage(frame1);
 	        saveFrame(frame1);
 	    }
+	    */
+		
+	    saveFrame(frame1);
 	    
 	    grabber.stop();
 	    canvasFrame.dispose();
