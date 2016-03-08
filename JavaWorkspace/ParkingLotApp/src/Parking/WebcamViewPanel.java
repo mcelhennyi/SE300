@@ -1,6 +1,11 @@
 package Parking;
 
 
+/**************************
+ * THIS MAY NOT BE NEEDED *
+ **************************/
+
+
 /**
  * @author michaelh
  * @version 1.0
